@@ -1,16 +1,20 @@
-name: Example Workflow
+name: artifact
 
 on:
   push:
     branches:
       - main
-
+env : 
+     NAME: README.md
 jobs:
-  example_job:
+  upload:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
       
-      - name: Print a message
-        run: echo "Hello, GitHub Actions!"
+      - name: upload file
+        uses: actions/upload-artifact@V4
+        with : 
+          name : ${{env.NAME}}
+          path : .
